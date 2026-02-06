@@ -10,11 +10,11 @@ A lightweight and powerful tool for reading and writing CSV files.
 
 #### Package Manage Console
 
-    Install-Package CsvHaibara -Version 1.0.0
+    Install-Package CsvHaibara -Version 1.0.1
 
 #### .NET CLI
 
-    dotnet add package CsvHaibara --version 1.0.0
+    dotnet add package CsvHaibara --version 1.0.1
 
 <br>
 
