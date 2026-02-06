@@ -21,13 +21,13 @@ A lightweight and powerful tool for reading and writing CSV files.
 ---
 
 ## How to use
-- Import namespace `CsvHaibaraNt.Core`
+- Import namespace `CsvHaibaraNt.Core`.
 
         using CsvHaibaraNt.Core;
 
 <br>
 
-- Get `ICsvHaibara` instance
+- Get `ICsvHaibara` instance.
 
         using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
         {
@@ -81,7 +81,7 @@ A lightweight and powerful tool for reading and writing CSV files.
 
 <br>
 
-- Change header title in CSV exported file by prefered name: if we like to use custom name other than property name for header column, use attribute `ColumnHeader` to decorate.
+- Change header title in CSV exported file by prefered name: if we like to use custom name other than property name for header column, use attribute `ColumnHeader` to decorate. Also, to use attributes in `CsvHaibara`, let's import namespace `CsvHaibaraNt.CoreModels`.
 
         [ColumnHeader("Given Name")]
         public string FirstName { get; set; }
