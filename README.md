@@ -1,4 +1,4 @@
-# CSV Haibara 1.0.2
+# CSV Haibara
 
 A lightweight and versatile tool for reading and writing CSV files.
 
@@ -8,11 +8,11 @@ A lightweight and versatile tool for reading and writing CSV files.
 
 #### Package Manage Console
 
-    Install-Package CsvHaibara -Version 1.0.2
+    Install-Package CsvHaibara
 
 #### .NET CLI
 
-    dotnet add package CsvHaibara --version 1.0.2
+    dotnet add package CsvHaibara
 
 <br>
 
