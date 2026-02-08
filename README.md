@@ -32,8 +32,6 @@ A lightweight and versatile tool for reading and writing CSV files.
 
 <br>
 
----
-
 ## Let's get started with an example
 - Assume that we have class `Employee`.
 
@@ -43,6 +41,7 @@ A lightweight and versatile tool for reading and writing CSV files.
             public string LastName { get; set; }
             public bool Gender { get; set; }
         }
+
 <br>
 
 - **Serialize** list of employees to a CSV file: call method `SerializeAsync`. Note that if we like not to serialize the header row, set the 3<sup>rd</sup> argument to *false*, or simply do not specify since its default value is *false*. Also, in case list of objects is null, an exception will be thrown;
