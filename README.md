@@ -1,6 +1,6 @@
 # CSV Haibara
 
-A lightweight and versatile tool for reading and writing CSV files.
+A lightweight and versatile tool for reading and writing CSV files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization.
 
 <br>
 
@@ -92,7 +92,7 @@ A lightweight and versatile tool for reading and writing CSV files.
 
 <br>
 
-- Change header title in CSV exported file by prefered name: if we like to employ custom name other than property name for header column, use attribute `ColumnHeader` to decorate. Also, to use attributes in `CsvHaibara`, let's import namespace `CsvHaibaraNt.CoreModels`.
+- Change header title in CSV exported file by prefered name: if we like to employ custom name other than property name for header column, use attribute `ColumnHeader` to decorate. Also, to use attributes in `CsvHaibara`, let's import namespace `CsvHaibaraNt.CoreModels`. In addition, `ColumnHeader` is only used in exporting, since `CsvHaibara` always imports by property order.
 
         [ColumnHeader("Given Name")]
         public string FirstName { get; set; }
