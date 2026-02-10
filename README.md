@@ -1,4 +1,4 @@
-# CSV Haibara
+# Csv Haibara
 
 A lightweight and versatile tool for reading and writing CSV files. Focus on `smooth asynchronous` processing, `streaming large files` efficiently, and maintaining consistent rules for serialization and deserialization.
 
