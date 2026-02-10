@@ -58,9 +58,15 @@ A lightweight and versatile tool for reading and writing CSV files. Focus on `sm
 
 <br>
 
-- In case, there are some columns that we like not to generate when *serializing*, for example: `FirstName` and `Gender`. Call method `Ignore` as follows, before doing serialization.
+- In case, there are some columns that we like not to generate when *serializing*, or not to assign value when *deserializing*, for example: `FirstName` and `Gender`. Call method `Ignore` as follows, before doing serialization/deserialization.
 
         csvHaibara.Ignore<Employee>(m => m.FirstName, m => m.Gender);
+
+<br>
+
+- **Important**: to be backward compatible when deserializing. Here are the restrictions:
+    - If there is no ignore column, then of course the total of columns in input file must equal to the total of properties.
+    - If there are some columns have been setting ignore, then the input file can contain all columns (like the above) or *only contains non-ignore columns*.
 
 <br>
 
