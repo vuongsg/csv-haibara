@@ -80,6 +80,12 @@ namespace CsvHaibaraDemos.WpfApp
                 sw.Stop();
                 ResetUI(count, true);
 			}
+            catch (Exception ex)
+            {
+                sw.Stop();
+                ResetUI(count, true);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 		}
 
         private void ResetUI(int count, bool cancelled)
