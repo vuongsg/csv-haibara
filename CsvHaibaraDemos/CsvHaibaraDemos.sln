@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{AD44633F-7BE2-4E5F-BC34-A8390546D5AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvHaibaraDemos.WpfApp", "CsvHaibaraDemos.WpfApp\CsvHaibaraDemos.WpfApp.csproj", "{52FA5D2C-64B8-4890-A21F-3B7574DC6EBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvHaibaraDemos.Commons", "CsvHaibaraDemos.Commons\CsvHaibaraDemos.Commons.csproj", "{6DFD34C4-FD80-4F4D-B0C0-69B7D8FD7807}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52FA5D2C-64B8-4890-A21F-3B7574DC6EBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52FA5D2C-64B8-4890-A21F-3B7574DC6EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52FA5D2C-64B8-4890-A21F-3B7574DC6EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52FA5D2C-64B8-4890-A21F-3B7574DC6EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DFD34C4-FD80-4F4D-B0C0-69B7D8FD7807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DFD34C4-FD80-4F4D-B0C0-69B7D8FD7807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DFD34C4-FD80-4F4D-B0C0-69B7D8FD7807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DFD34C4-FD80-4F4D-B0C0-69B7D8FD7807}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52FA5D2C-64B8-4890-A21F-3B7574DC6EBE} = {AD44633F-7BE2-4E5F-BC34-A8390546D5AB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB7C706C-54D5-4874-85E9-3CE9DA51D073}
+	EndGlobalSection
+EndGlobal
