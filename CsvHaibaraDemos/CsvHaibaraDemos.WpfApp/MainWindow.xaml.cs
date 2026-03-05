@@ -1,5 +1,4 @@
-﻿using CsvHaibaraDemos.Commons;
-using CsvHaibaraNt.Core;
+﻿using CsvHaibaraNt.Core;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.Configuration;
@@ -47,6 +46,7 @@ namespace CsvHaibaraDemos.WpfApp
             {
                 btnRead.IsEnabled = btnSelectFile.IsEnabled = false;
                 btnCancel.IsEnabled = true;
+                cbxHasHeader.IsEnabled = false;
                 Title = "Serializing...";
                 tblCount.Text = string.Empty;
             });
@@ -59,12 +59,13 @@ namespace CsvHaibaraDemos.WpfApp
                 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
                 {
                     string path = tbxFilePath.Text;
+                    bool header = cbxHasHeader.IsChecked == true;
                     cts = new();
                     sw.Start();
 
                     await Task.Run(async () =>
                     {
-                        await foreach (Sale sale in csvHaibara.DeserializeAsync<Sale>(path, hasHeader: true, null, cts.Token))
+                        await foreach (var item in csvHaibara.DeserializeAsync(path, hasHeader: header, cts.Token))
                             count++;
                     });
 
@@ -94,6 +95,7 @@ namespace CsvHaibaraDemos.WpfApp
 			{
 				btnRead.IsEnabled = btnSelectFile.IsEnabled = true;
                 btnCancel.IsEnabled = false;
+                cbxHasHeader.IsEnabled = true;
                 Title = TITLE;
 
                 if (cancelled)

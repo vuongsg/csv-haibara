@@ -113,6 +113,23 @@ A lightweight and versatile tool for reading and writing CSV files. Focus on `sm
 
 <br>
 
+## Releases
+### v1.0.8 (March 6, 2026): add new function *"convert to dynamic objects"*. 
+- The objects' properties will be `Property_0`, `Property_1`, and so on.
+- The data type of all objects' properties will be `object` by default.
+
+        var lst = new List<dynamic>();
+        using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+        {
+            await foreach (var item in csvHaibara.DeserializeAsync(path, hasHeader: true))
+                lst.Add(item);
+        }
+
+        Console.WriteLine(lst[0].Property_0);
+        Console.WriteLine(lst[0].Property_1);
+
+<br>
+
 ## Support
 - .NET 8.0
 - .NET 9.0

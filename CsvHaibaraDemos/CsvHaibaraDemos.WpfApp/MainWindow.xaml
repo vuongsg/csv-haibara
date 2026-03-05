@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CsvHaibaraDemos.WpfApp"
         mc:Ignorable="d"
-        Height="300" Width="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Height="340" Width="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Width" Value="80" />
@@ -22,12 +22,17 @@
             <Setter Property="FontSize" Value="14" />
         </Style>
 
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
         <Style TargetType="{x:Type ListBox}">
             <Setter Property="FontSize" Value="14" />
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -38,7 +43,11 @@
             <TextBox x:Name="tbxFilePath" Margin="30,0,0,0" Width="560" Height="60" IsEnabled="False" />
         </StackPanel>
 
-        <Grid Grid.Row="1" Margin="0,50,0,50">
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <CheckBox x:Name="cbxHasHeader" Margin="10,40,0,10">Has Header</CheckBox>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Margin="0,50,0,50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -48,6 +57,6 @@
             <Button Grid.Column="1" x:Name="btnCancel" Content="Cancel" IsEnabled="False" Click="btnCancel_Click" />
         </Grid>
 
-        <TextBlock Grid.Row="2" x:Name="tblCount" Margin="20,0,0,0" />
+        <TextBlock Grid.Row="3" x:Name="tblCount" Margin="20,0,0,0" />
     </Grid>
 </Window>
