@@ -74,7 +74,7 @@ namespace CsvHaibaraDemos.WpfApp
 
                 ResetUI(count, false);
 
-				MessageBox.Show($"Completed. Time take: {sw.Elapsed.TotalMilliseconds} ms.");
+				MessageBox.Show(this, $"Completed. Time taken: {sw.Elapsed.TotalSeconds} seconds.");
 			}
             catch (OperationCanceledException)
             {

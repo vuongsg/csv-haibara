@@ -114,7 +114,22 @@ A lightweight and versatile tool for reading and writing CSV files. Focus on `sm
 <br>
 
 ## Releases
-### v1.0.8 (March 6, 2026): add new function *"convert to dynamic objects"*. 
+### v1.0.9 (March 7, 2026): new function *"read anonymous type objects"*.
+
+        var objDefinition = new
+        {
+            Id = default(int),
+            Name = string.Empty
+        };
+        var lst = new List<dynamic>();
+
+        using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+        {
+            await foreach (var item in csvHaibara.DeserializeAsync(objDefinition, path, hasHeader: true))
+                lst.Add(item);
+        }
+
+### v1.0.8 (March 6, 2026): new function *"read dynamic objects"*. 
 - The objects' properties will be `Property_0`, `Property_1`, and so on.
 - The data type of all objects' properties will be `object` by default.
 
