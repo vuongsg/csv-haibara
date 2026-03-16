@@ -215,7 +215,7 @@ var persons = new List&lt;Person&gt;
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
     using (StreamOut streamOut = new(csvHaibara, path))
-        await csvHaibara.SerializeAsynct&lt;Person&gt;(streamOut, persons, true);
+        await csvHaibara.SerializeAsync&lt;Person&gt;(streamOut, persons, true);
 }
                             </pre>
                         </code>
@@ -249,7 +249,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
     using (StreamIn streamIn = new(csvHaibara, path))
     {
-        await foreach (Person person in csvHaibara.DeserializeAsynct&lt;Person&gt;(streamIn, true))
+        await foreach (Person person in csvHaibara.DeserializeAsync&lt;Person&gt;(streamIn, true))
             lst.Add(item);
     }
 }
@@ -340,7 +340,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
     csvHaibara.Ignore(m => m.Gender, m => m.Age);
     using (StreamIn streamIn = new(csvHaibara, path))
     {
-        await foreach (Person person in csvHaibara.DeserializeAsynct&lt;Person&gt;(streamIn, true))
+        await foreach (Person person in csvHaibara.DeserializeAsync&lt;Person&gt;(streamIn, true))
             lst.Add(item);
     }
 }
