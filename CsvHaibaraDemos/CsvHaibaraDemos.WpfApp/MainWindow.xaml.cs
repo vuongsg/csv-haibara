@@ -63,33 +63,39 @@ namespace CsvHaibaraDemos.WpfApp
                     cts = new();
                     sw.Start();
 
-                    await Task.Run(async () =>
+                    using (StreamIn streamIn = new(csvHaibara, path))
                     {
-                        await foreach (var item in csvHaibara.DeserializeAsync(path, hasHeader: header, cts.Token))
-                            count++;
-                    });
+                        await Task.Run(async () =>
+                        {
+                            await foreach (var item in csvHaibara.DeserializeAsync(streamIn, hasHeader: header, cts.Token))
+                                count++;
+                        });
+                    }
 
                     sw.Stop();
                 }
 
-                ResetUI(count, false);
+                double timeTaken = Math.Round(sw.Elapsed.TotalMilliseconds, 2);
+				ResetUI(count, false, timeTaken);
 
-				MessageBox.Show(this, $"Completed. Time taken: {Math.Round(sw.Elapsed.TotalMilliseconds, 2)} miliseconds.");
+				MessageBox.Show(this, $"Completed. Time taken: {timeTaken} miliseconds.");
 			}
             catch (OperationCanceledException)
             {
                 sw.Stop();
-                ResetUI(count, true);
+				double timeTaken = Math.Round(sw.Elapsed.TotalMilliseconds, 2);
+				ResetUI(count, true, timeTaken);
 			}
             catch (Exception ex)
             {
                 sw.Stop();
-                ResetUI(count, true);
+				double timeTaken = Math.Round(sw.Elapsed.TotalMilliseconds, 2);
+				ResetUI(count, true, timeTaken);
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 		}
 
-        private void ResetUI(int count, bool cancelled)
+        private void ResetUI(int count, bool cancelled, double timeTaken)
         {
 			Dispatcher.Invoke(() =>
 			{
@@ -99,9 +105,9 @@ namespace CsvHaibaraDemos.WpfApp
                 Title = TITLE;
 
                 if (cancelled)
-					tblCount.Text = $"There are total {count} objects (Cancelled).";
+					tblCount.Text = $"There are total {count} objects (Cancelled). Time taken: {timeTaken} miliseconds.";
                 else
-					tblCount.Text = $"There are total {count} objects.";
+					tblCount.Text = $"There are total {count} objects. Time taken: {timeTaken} miliseconds.";
 			});
 		}
 

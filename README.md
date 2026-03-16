@@ -1,4 +1,4 @@
-# From latest version 1.0.10 () on, please visit offical website https://vuongsg.github.io/csv-haibara/
+# From latest version 1.0.10 (Released on March, 16th 2026) on, please visit offical website https://vuongsg.github.io/csv-haibara/
 
 <br>
 
