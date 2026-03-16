@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Csv Haibara</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="A lightweight and versatile library for reading and writing CSV files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization." />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: rgb(100, 100, 100);
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+
+            h2 {
+                color: rgb(150, 150, 150);
+            }
+
+            a {
+                color: rgb(20, 105, 36);
+                text-decoration: none;
+            }
+
+            a:hover, a:active {
+                font-style: italic;
+            }
+
+            .button-link {
+                display: block;
+                text-align: center;
+                width: 30%;
+                padding: 15px 0 15px;
+                background: rgb(211, 211, 211);
+                color: #000;
+                font-size: 1.3em;
+            }
+
+            ul li {
+                margin: 0;
+                padding: 0;
+            }
+
+            li {
+                list-style: none;
+            }
+
+            li a {
+                text-decoration: none;
+                display: block;
+                padding: 8px 10px;
+            }
+
+            li a:hover {
+                background: rgb(50, 150, 205);
+            }
+
+            #container {
+                background: #fff;
+                margin: 20px 60px;
+                padding: 15px;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .flex-item {
+                min-width: 0;
+            }
+
+            @media screen and (max-width: 700px) {
+                .flex-item {
+                    width: 100%;
+                    flex-basis: 100%;
+                }
+
+                .button-link {
+                    width: 100%;
+                }
+            }
+
+            @media screen and (min-width: 701px) and (max-width: 1070px) {
+                .button-link {
+                    width: 75%;
+                }
+            }
+
+            #navigation {
+                flex: 20%;
+                overflow: visible;
+            }
+
+            #navigation ul {
+                position: sticky;
+                top: 5px;
+            }
+
+            #main {
+                flex: 80%;
+                padding-left: 7px;
+            }
+
+            .part {
+                margin: 15px 10px 0 0;
+                padding: 15px;
+            }
+
+            .box {
+                margin: 20px 0 50px;
+                overflow-x: auto;
+            }
+
+            .code {
+                background: #f5f5f5;
+                color: #4a4a4a;
+                font-size: 1.3em;
+                padding: 6px 3px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id="navigation" class="flex-item"></div>
+
+            <div id="main" class="flex-item">
+                <div class="part">
+                    <h1>Csv Haibara</h1>
+                    <h1>Latest version: 1.0.10</h1><br/>
+                    <p style="font-style: italic; font-size: 1.1em; color: gray;">A lightweight and versatile library for reading and writing CSV files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization.</p>
+                </div>
+
+                <div id="install-div" class="part">
+                    <h2>Install</h2>
+
+                    <div class="box">
+                        <h3>Package Manage Console</h3>
+                        <div class="code">
+                            <code>Install-Package CsvHaibara</code>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <h3>.NET CLI</h3>
+                        <div class="code">
+                            <code>dotnet add package CsvHaibara</code>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <a class="button-link" target="_blank" href="https://www.nuget.org/packages/CsvHaibara/">Download at Nuget</a>
+                    </div>
+
+                    <div class="box">
+                        <a class="button-link" target="_blank" href="https://github.com/vuongsg/csv-haibara">GitHub Demo project</a>
+                    </div>
+                </div>
+
+                <div id="streamin-div" class="part">
+                    <h2>Class StreamIn (used in reading file)</h2>
+                    <div class="box code">
+                        <code>
+                            StreamIn streamIn = new(ICsvHaibara csvHaibara, string path);
+                        </code>
+                    </div>
+                    <div class="box code">
+                        <code>
+                            StreamIn streamIn = new(ICsvHaibara csvHaibara, Stream stream);
+                        </code>
+                    </div>
+                </div>
+
+                <div id="streamout-div" class="part">
+                    <h2>Class StreamOut (used in writing file)</h2>
+                    <div class="box code">
+                        <code>
+                            StreamOut streamOut = new(ICsvHaibara csvHaibara, string path);
+                        </code>
+                    </div>
+                    <div class="box code">
+                        <code>
+                            StreamOut streamOut = new(ICsvHaibara csvHaibara, Stream stream);
+                        </code>
+                    </div>
+                </div>
+
+                <div id="serialize-div" class="part">
+                    <h2>Serialize</h2>
+                    <div class="box code">
+                        <code>
+                            <pre>
+class Person
+{
+    public string Name { get; set; }
+    public bool Gender { get; set; }
+    public int Age { get; set; }
+}
+                            </pre>
+                        </code>
+                    </div>
+
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+string path = "person.csv";
+var persons = new List&lt;Person&gt;
+{
+    new Person { Name = "Alice", Gender = false, Age = 20 },
+    new Person { Name = "Adam", Gender = true, Age = 25 }
+};
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    using (StreamOut streamOut = new(csvHaibara, path))
+        await csvHaibara.SerializeAsynct&lt;Person&gt;(streamOut, persons, true);
+}
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="deserialize-generic-div" class="part">
+                    <h2>Deserialize to generic objects</h2>
+                    <div class="box code">
+                        <code>
+                            <pre>
+class Person
+{
+    public string Name { get; set; }
+    public bool Gender { get; set; }
+    public int Age { get; set; }
+}
+                            </pre>
+                        </code>
+                    </div>
+
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+string path = "person.csv";
+var lst = new List&lt;Person&gt;();
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    using (StreamIn streamIn = new(csvHaibara, path))
+    {
+        await foreach (Person person in csvHaibara.DeserializeAsynct&lt;Person&gt;(streamIn, true))
+            lst.Add(item);
+    }
+}
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="deserialize-dynamic-div" class="part">
+                    <h2>Deserialize to dynamic objects</h2>
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+string path = "person.csv";
+var lst = new List&lt;dynamic&gt;();
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    using (StreamIn streamIn = new(csvHaibara, path))
+    {
+        await foreach (var obj in csvHaibara.DeserializeAsync(streamIn, true))
+            lst.Add(obj);
+    }
+}
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="deserialize-anonymous-div" class="part">
+                    <h2>Deserialize to anonymous objects</h2>
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+string path = "person.csv";
+var lst = new List&lt;dynamic&gt;();
+var objDefinition = new 
+{
+    Name = string.Empty;,
+    Gender = default(bool)
+    Age = default(int)
+};
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    using (StreamIn streamIn = new(csvHaibara, path))
+    {
+        await foreach (var obj in csvHaibara.DeserializeAsync(objDefinition, streamIn, true))
+            lst.Add(obj);
+    }
+}
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="ignore-columns-div" class="part">
+                    <h2>Ignore columns</h2>
+                    <h3>All ignore properties will be left as their default value, e.g. 0 for int, false for bool</h3>
+                    <h3>When writing file, all ignore columns won't be output</h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+class Person
+{
+    public string Name { get; set; }
+    public bool Gender { get; set; }
+    public int Age { get; set; }
+}
+                            </pre>
+                        </code>
+                    </div>
+
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+string path = "person.csv";
+var lst = new List&lt;Person&gt;();
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    csvHaibara.Ignore(m => m.Gender, m => m.Age);
+    using (StreamIn streamIn = new(csvHaibara, path))
+    {
+        await foreach (Person person in csvHaibara.DeserializeAsynct&lt;Person&gt;(streamIn, true))
+            lst.Add(item);
+    }
+}
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="includeall-div" class="part">
+                    <h2>Include all columns</h2>
+                    <h3>Later on, when you want to take all ignored columns again</h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    csvHaibara.IncludeAll();
+}
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="delimiter-div" class="part">
+                    <h2>Setting Delimiter</h2>
+                    <h3>Default Delimiter is comma</h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    csvHaibara.Delimiter = ';';
+}
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="encoding-div" class="part">
+                    <h2>Setting Encoding</h2>
+                    <h3>Default Encoding is UTF8</h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    csvHaibara.Encoding = Encoding.ASCII;
+}                                
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="escape-div" class="part">
+                    <h2>Setting Escape</h2>
+                    <h3>Default Escape is "</h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    csvHaibara.Escape = '^';
+}                                
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="cultureinfo-div" class="part">
+                    <h2>Setting CultureInfo</h2>
+                    <h3>Default CultureInfo is CurrentCulture</h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    csvHaibara.CultureInfo = CultureInfo.InvariantCulture;
+}                                
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="booleanconverter-div" class="part">
+                    <h2>Boolean Converter</h2>
+                    <h3>Instead of traditional values <i>true/false</i>. You want to use other values like <i>yes/no</i>, <i>1/0</i></h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+public class Person
+{
+    public string Name { get; set; }
+
+    [BooleanFalseValue("0")]
+    [BooleanTrueValue("1")]
+    public bool Gender { get; set; }
+
+    public int Age { get; set; }
+}
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="columnheader-div" class="part">
+                    <h2>Setting column header</h2>
+                    <h3>Custom column header will be display in output file</h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+public class Person
+{
+    [ColumnHeader("Given Name")]
+    public string FirstName { get; set; }
+
+    [ColumnHeader("Family Name")]
+    public string LastName { get; set; }
+}
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="about-part" class="part">
+                    <h3>Copyright &copy; Vuong Nguyen - 2026</h3>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const menus = [
+                ["#main", "Back to Top"],
+                ["#install-div", "Install"],
+                ["#streamin-div", "Class StreamIn"],
+                ["#streamout-div", "Class StreamOut"],
+                ["#serialize-div", "Serialize"],
+                ["#deserialize-generic-div", "Deserialize Generic"],
+                ["#deserialize-dynamic-div", "Deserialize Dynamic"],
+                ["#deserialize-anonymous-div", "Deserialize Anonymous"],
+                ["#ignore-columns-div", "Ignore Columns"],
+                ["#includeall-div", "Include All Columns"],
+                ["#delimiter-div", "Setting Delimiter"],
+                ["#encoding-div", "Setting Encoding"],
+                ["#escape-div", "Setting Escape"],
+                ["#cultureinfo-div", "Setting CultureInfo"],
+                ["#booleanconverter-div", "Boolean Converter"],
+                ["#columnheader-div", "Setting Column Header"],
+                ["#about-part", "About"]
+            ];
+
+            window.addEventListener("load", evt => {
+                const navigation = document.querySelector("#navigation");
+                let content = "<ul>";
+
+                for (let m of menus) {
+                    content += "<li>";
+                    content += `<a href="${m[0]}">${m[1]}</a>`;
+                    content += "</li>";
+                }
+
+                content += "</ul>";
+                navigation.innerHTML = content;
+            });
+        </script>
+    </body>
+</html>
