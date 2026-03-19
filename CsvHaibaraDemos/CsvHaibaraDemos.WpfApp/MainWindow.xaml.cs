@@ -30,6 +30,14 @@ namespace CsvHaibaraDemos.WpfApp
             Title = TITLE;
         }
 
+        private char GetDelimiter()
+        {
+            if (string.IsNullOrEmpty(tbxDelimiter.Text))
+                return ',';
+
+            return tbxDelimiter.Text[0];
+        }
+
 		private void btnSelectFile_Click(object sender, RoutedEventArgs e)
 		{
             OpenFileDialog ofd = new OpenFileDialog();
@@ -58,6 +66,7 @@ namespace CsvHaibaraDemos.WpfApp
             {
                 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
                 {
+                    csvHaibara.Delimiter = GetDelimiter();
                     string path = tbxFilePath.Text;
                     bool header = cbxHasHeader.IsChecked == true;
                     cts = new();

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CsvHaibaraDemos.WpfApp"
         mc:Ignorable="d"
-        Height="340" Width="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Height="360" Width="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Width" Value="80" />
@@ -43,9 +43,18 @@
             <TextBox x:Name="tbxFilePath" Margin="30,0,0,0" Width="560" Height="60" IsEnabled="False" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <CheckBox x:Name="cbxHasHeader" Margin="10,40,0,10">Has Header</CheckBox>
-        </StackPanel>
+        <Grid Grid.Row="1" Margin="10,40,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <CheckBox Grid.Column="0" x:Name="cbxHasHeader" VerticalAlignment="Center">Has Header</CheckBox>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <TextBlock Text="Delimiter" Margin="0,0,10,0" VerticalAlignment="Center" />
+                <TextBox x:Name="tbxDelimiter" MaxLength="1" Width="30" FontSize="30" Text="," />
+            </StackPanel>
+        </Grid>
 
         <Grid Grid.Row="2" Margin="0,50,0,50">
             <Grid.ColumnDefinitions>

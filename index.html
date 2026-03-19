@@ -343,7 +343,7 @@ var lst = new List&lt;Person&gt;();
 
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
-    csvHaibara.Ignore(m => m.Gender, m => m.Age);
+    csvHaibara.Ignore&lt;Person&gt;(m =&gt; m.Gender, m =&gt; m.Age);
     using (StreamIn streamIn = new(csvHaibara, path))
     {
         await foreach (Person person in csvHaibara.DeserializeAsync&lt;Person&gt;(streamIn, true))
@@ -365,7 +365,7 @@ using CsvHaibaraNt.Core;
 
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
-    csvHaibara.IncludeAll();
+    csvHaibara.IncludeAll&lt;Person&gt;();
 }
                             </pre>
                         </code>
