@@ -22,6 +22,23 @@
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             }
 
+            #btn-back-to-top {
+                position: fixed;
+                display: none;
+                bottom: 2em;
+                right: 1em;
+                cursor: pointer;
+                width: 0;
+                height: 0;
+                border-left: 30px solid transparent;
+                border-right: 30px solid transparent;
+                border-bottom: 40px solid red;
+            }
+
+            #btn-back-to-top:hover {
+                opacity: 0.4;
+            }
+
             h2 {
                 color: rgb(150, 150, 150);
             }
@@ -103,9 +120,18 @@
             }
 
             @media screen and (max-width: 720px) {
-                .flex-item {
-                    width: 100%;
-                    flex-basis: 100%;
+                #container {
+                    display: block;
+                }
+
+                #navigation {
+                    margin-bottom: 1.1em;
+                }
+
+                #navigation ul {
+                    display: flex;
+                    justify-content: center;
+                    flex-wrap: wrap;
                 }
 
                 .button-link {
@@ -165,6 +191,7 @@
         </style>
     </head>
     <body>
+        <a id="btn-back-to-top" title="Back to Top" onclick="window.scrollTo(0,0)"></a>
         <div id="container">
             <div id="navigation" class="flex-item"></div>
 
@@ -533,7 +560,6 @@ public class Person
 
         <script>
             const menus = [
-                ["javascript:window.scrollTo(0,0)", "Back to Top"],
                 ["#install-div", "Install"],
                 ["#streamin-div", "Class StreamIn"],
                 ["#streamout-div", "Class StreamOut"],
@@ -576,6 +602,15 @@ public class Person
                     m.classList.add("active");
                 });
             }
+            });
+
+            const btnBackToTop = document.querySelector("#btn-back-to-top");
+            window.addEventListener("scroll", () => {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    btnBackToTop.style.display = "block";
+                } else {
+                    btnBackToTop.style.display = "none";
+                }
             });
             
         </script>
