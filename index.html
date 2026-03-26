@@ -13,6 +13,10 @@
                 box-sizing: border-box;
             }
 
+            html {
+                scroll-behavior: smooth;
+            }
+
             body {
                 background: rgb(100, 100, 100);
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -27,7 +31,7 @@
                 text-decoration: none;
             }
 
-            a:hover, a:active {
+            a:hover:not(.active), a:active:not(.active) {
                 font-style: italic;
             }
 
@@ -82,7 +86,7 @@
                 color: #fff;
             }
 
-            li a:hover {
+            li a:hover:not(.active) {
                 background: rgb(50, 150, 205);
             }
 
@@ -171,7 +175,7 @@
                     <div class="div-snippet">
                         <span class="snippet" title="RFC 4180 Full Support">RFC 4180</span>
                         <span class="snippet">Low memory usage</span>
-                        <span class="snippet">Ultra fast</span>
+                        <span class="snippet">Ultra-rapid</span>
                     </div>
 
                     <h1>Latest version: 1.0.13</h1><br/>
@@ -529,7 +533,7 @@ public class Person
 
         <script>
             const menus = [
-                ["#main", "Back to Top"],
+                ["javascript:window.scrollTo(0,0)", "Back to Top"],
                 ["#install-div", "Install"],
                 ["#streamin-div", "Class StreamIn"],
                 ["#streamout-div", "Class StreamOut"],
