@@ -552,6 +552,39 @@ public class Person
                     </div>
                 </div>
 
+                <div id="exception-div" class="part">
+                    <h2>Exception</h2>
+                    <h3>Exeption only occurs in these cases:</h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+- There is conflict between Delimiter and Escape
+    Ex: Delimiter and Escape are both comma
+
+- There is conflict between Delimiter and CultureInfo's decimal point
+    Ex: Delimiter and decimal point are both comma
+
+- There is conflict between Escape and CultureInfo's decimal point
+    Ex: Escape and decimal point are both comma
+
+- Cast value failed
+    Ex:
+    public class Person
+    {
+        public string Name { get; set; }
+        public bool Gender { get; set; }
+        public int Age { get; set; }
+    }
+
+    Input file:
+    Mary, false, c
+
+    Then it should be failed when parsing column Age
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
                 <div id="about-part" class="part">
                     <h3>Copyright &copy; Vuong Nguyen - 2026</h3>
                 </div>
@@ -575,6 +608,7 @@ public class Person
                 ["#cultureinfo-div", "Setting CultureInfo"],
                 ["#booleanconverter-div", "Boolean Converter"],
                 ["#columnheader-div", "Setting Column Header"],
+                ["#exception-div", "Exception"],
                 ["#about-part", "About"]
             ];
 
