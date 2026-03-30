@@ -35,7 +35,7 @@
                 height: 0;
                 border-left: 30px solid transparent;
                 border-right: 30px solid transparent;
-                border-bottom: 30px solid red;
+                border-bottom: 30px solid rgb(255, 0, 0);
             }
 
             #btn-back-to-top:hover {
@@ -44,6 +44,10 @@
 
             h2 {
                 color: rgb(150, 150, 150);
+            }
+
+            .important {
+                color: rgb(255, 0, 0);
             }
 
             a {
@@ -76,9 +80,10 @@
 
             .snippet {
                 display: inline-block;
-                margin-right: 30px;
+                margin-right: 1.875em;
+                margin-bottom: 1em;
                 text-align: center; 
-                width: 9.5em; 
+                width: 9.5em;
                 font-size: 1.3em; 
                 font-weight: bold; 
                 background: rgb(211, 211, 211); 
@@ -191,6 +196,10 @@
                 font-size: 1.3em;
                 padding: 6px 3px;
             }
+
+            .spacing-height {
+                line-height: 1.5em;
+            }
         </style>
     </head>
     <body>
@@ -205,10 +214,13 @@
                     <div class="div-snippet">
                         <span class="snippet" title="RFC 4180 Full Support">RFC 4180</span>
                         <span class="snippet">Low memory usage</span>
+                        <span class="snippet">Support nested objects</span>
+                        <span class="snippet">Support class and struct</span>
+                        <span class="snippet">No dependencies</span>
                         <span class="snippet">Ultra-rapid</span>
                     </div>
 
-                    <h1>Latest version: 1.0.13</h1><br/>
+                    <h1>Latest version: 1.0.14</h1><br/>
                     <p style="font-style: italic; font-size: 1.3em; color: gray; line-height: 1.5em;">A lightweight and versatile library for reading and writing CSV files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization.</p>
                 </div>
 
@@ -304,7 +316,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
                 </div>
 
                 <div id="deserialize-generic-div" class="part">
-                    <h2>Deserialize to generic objects</h2>
+                    <h2>Deserialize to generic objects (<span class="important">class or struct</span>)</h2>
                     <div class="box code">
                         <code>
                             <pre>
@@ -393,10 +405,10 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 
                 <div id="ignore-columns-div" class="part">
                     <h2>Ignore columns</h2>
-                    <h3 style="line-height: 1.5em;">
+                    <h3 class="spacing-height">
                         <p></p>All ignored properties will be left as their default value, e.g. 0 for int, false for bool</p>
                         <p>When writing file, all ignored columns disappear in output file</p>
-                        <p>In contrast when reading, input file must be either case: contains all columns or does not contain ignored columns. Other cases will yield unexpected results</p>
+                        <p>When reading file, all ignored columns <span class="important">MUST NOT APPEAR in input file</span></p>
                     </h3>
                     <div class="box code">
                         <code>
@@ -452,7 +464,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 
                 <div id="delimiter-div" class="part">
                     <h2>Setting Delimiter</h2>
-                    <h3>Default Delimiter is comma</h3>
+                    <h3>Default Delimiter is <code>comma</code></h3>
                     <div class="box code">
                         <code>
                             <pre>
@@ -469,7 +481,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 
                 <div id="encoding-div" class="part">
                     <h2>Setting Encoding</h2>
-                    <h3>Default Encoding is UTF8</h3>
+                    <h3>Default Encoding is <code>UTF8</code></h3>
                     <div class="box code">
                         <code>
                             <pre>
@@ -486,7 +498,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 
                 <div id="escape-div" class="part">
                     <h2>Setting Escape</h2>
-                    <h3>Default Escape is "</h3>
+                    <h3>Default Escape is <code>"</code></h3>
                     <div class="box code">
                         <code>
                             <pre>
@@ -503,7 +515,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 
                 <div id="cultureinfo-div" class="part">
                     <h2>Setting CultureInfo</h2>
-                    <h3>Default CultureInfo is CurrentCulture</h3>
+                    <h3>Default CultureInfo is <code>CurrentCulture</code></h3>
                     <div class="box code">
                         <code>
                             <pre>
@@ -512,6 +524,28 @@ using CsvHaibaraNt.Core;
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
     csvHaibara.CultureInfo = CultureInfo.InvariantCulture;
+}                                
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="nullstringvalue-div" class="part">
+                    <h2>Setting NullStringValue</h2>
+                    <h3 class="spacing-height">
+                        <p>To distinguish null string from empty string.</p>
+                        <p>By default, missing value of string field is treated at an empty string.</p>
+                        <p>Therefore, in order to get null value, you have to indicate a special string as null value. If any string field gets this value, it is considered as null value. Make sure this is the unique string to avoid unexpected results.</p>
+                        <p>Default NullStringValue is <code>null</code>.</p>
+                    </h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    csvHaibara.NullStringValue = "None";
 }                                
                             </pre>
                         </code>
@@ -553,6 +587,83 @@ public class Person
     [ColumnHeader("Family Name")]
     public string LastName { get; set; }
 }
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="mapreference-div" class="part">
+                    <h2>Map Reference</h2>
+                    <h3>Indicate that specified property of <code>TSource</code> is an instance object of <code>TDestination</code></h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+public class Person
+{
+	public string Name {  get; set; }
+	public Address Address1 { get; set; }
+	public int Age {  get; set; }
+	public Address Address2 { get; set; }
+}
+
+public class Address
+{
+	public string City { get; set; }
+	public string Country { get; set; }
+}
+                            </pre>
+                        </code>
+                    </div>
+
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    csvHaibara.MapReference&lt;Person, Address&gt;(m =&gt; m.Address1, m =&gt; m.Address2);
+} 
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
+                <div id="setnull-div" class="part">
+                    <h2>Assign object as null if all fields are null or missing values</h2>
+                    <h3 class="spacing-height">
+                        <p>Once this method is called with parameter <code>true</code>, then when reading file, if all fields are null or missing values, that object will be assigned as <code>null</code> class object or <code>default value</code> struct object</p>
+                        <p>The default treatment is corresponding with parameter <code>false</code>, that object is still not null</p>
+                    </h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+public class Person
+{
+	public string Name {  get; set; }
+	public Address Address1 { get; set; }
+	public int Age {  get; set; }
+	public Address Address2 { get; set; }
+}
+
+public class Address
+{
+	public string City { get; set; }
+	public string Country { get; set; }
+}
+                            </pre>
+                        </code>
+                    </div>
+
+                    <div class="box code">
+                        <code>
+                            <pre>
+using CsvHaibaraNt.Core;
+
+using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
+{
+    csvHaibara.SetNullIfAllFieldsNull&lt;Address&gt;(true);
+} 
                             </pre>
                         </code>
                     </div>
@@ -616,8 +727,11 @@ public class Person
                 ["#encoding-div", "Setting Encoding"],
                 ["#escape-div", "Setting Escape"],
                 ["#cultureinfo-div", "Setting CultureInfo"],
+                ["#nullstringvalue-div", "Setting NullStringValue", "&nbsp;&nbsp;(NEW in 5.14)"],
                 ["#booleanconverter-div", "Boolean Converter"],
                 ["#columnheader-div", "Setting Column Header"],
+                ["#mapreference-div", "Map Reference", "&nbsp;&nbsp;(NEW in 5.14)"],
+                ["#setnull-div", "Assign object as null if all fields are null or missing values", "&nbsp;&nbsp;(NEW in 5.14)"],
                 ["#exception-div", "Exception"],
                 ["#about-part", "About"]
             ];
@@ -627,7 +741,12 @@ public class Person
 
                 for (let m of menus) {
                     content += "<li>";
-                    content += `<a href="${m[0]}">${m[1]}</a>`;
+
+                    if (m[2])
+                        content += `<a href="${m[0]}">${m[1]}<span class="important">${m[2]}</span></a>`;
+                    else
+                        content += `<a href="${m[0]}">${m[1]}</a>`;
+
                     content += "</li>";
                 }
 
