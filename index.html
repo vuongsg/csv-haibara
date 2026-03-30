@@ -133,14 +133,17 @@
                 }
 
                 #navigation {
+                    max-height: 6em;
                     margin-bottom: 1.1em;
+                    background: #fff;
+                    border-bottom: 1px solid #000;
                 }
 
-                #navigation ul {
+                /*#navigation ul {
                     display: flex;
                     justify-content: center;
                     flex-wrap: wrap;
-                }
+                }*/
 
                 .button-link {
                     width: 100%;
@@ -154,6 +157,10 @@
             }
 
             @media screen and (min-width: 721px) and (max-width: 1070px) {
+                #navigation {
+                    max-height: 20em;
+                }
+
                 .button-link {
                     width: 75%;
                 }
@@ -167,12 +174,10 @@
 
             #navigation {
                 flex: 20%;
-                overflow: visible;
-            }
-
-            #navigation ul {
                 position: sticky;
                 top: 5px;
+                height: 38em;
+                overflow-y: auto;
             }
 
             #main {
