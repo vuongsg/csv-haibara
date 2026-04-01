@@ -10,6 +10,8 @@
         <meta property="og:image" content="" />
         <meta property="og:type" content="website" />
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
+
             * {
                 margin: 0;
                 padding: 0;
@@ -22,7 +24,8 @@
 
             body {
                 background: rgb(100, 100, 100);
-                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                /*font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
+                font-family: "Libre Franklin", sans-serif;
             }
 
             #btn-back-to-top {
@@ -225,7 +228,7 @@
                         <span class="snippet">Ultra-rapid</span>
                     </div>
 
-                    <h1>Latest version: 1.0.14</h1><br/>
+                    <h1>Latest version: 1.0.15</h1><br/>
                     <p style="font-style: italic; font-size: 1.3em; color: gray; line-height: 1.5em;">A lightweight and versatile library for reading and writing CSV files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization.</p>
                 </div>
 
@@ -597,47 +600,10 @@ public class Person
                     </div>
                 </div>
 
-                <div id="mapreference-div" class="part">
-                    <h2>Map Reference</h2>
-                    <h3>Indicate that specified property of <code>TSource</code> is an instance object of <code>TDestination</code></h3>
-                    <div class="box code">
-                        <code>
-                            <pre>
-public class Person
-{
-	public string Name {  get; set; }
-	public Address Address1 { get; set; }
-	public int Age {  get; set; }
-	public Address Address2 { get; set; }
-}
-
-public class Address
-{
-	public string City { get; set; }
-	public string Country { get; set; }
-}
-                            </pre>
-                        </code>
-                    </div>
-
-                    <div class="box code">
-                        <code>
-                            <pre>
-using CsvHaibaraNt.Core;
-
-using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
-{
-    csvHaibara.MapReference&lt;Person, Address&gt;(m =&gt; m.Address1, m =&gt; m.Address2);
-} 
-                            </pre>
-                        </code>
-                    </div>
-                </div>
-
-                <div id="setnull-div" class="part">
-                    <h2>Assign object as null if all fields are null or missing values</h2>
+                <div id="setdefault-div" class="part">
+                    <h2>Assign object as default value if all fields are null or missing values</h2>
                     <h3 class="spacing-height">
-                        <p>Once this method is called with parameter <code>true</code>, then when reading file, if all fields are null or missing values, that object will be assigned as <code>null</code> class object or <code>default value</code> struct object</p>
+                        <p>Once this method is called with parameter <code>true</code>, then when reading file, if all fields are null or missing values, that object will be assigned as <code>null</code> class object or <code>default value</code> struct object or its default value if any </p>
                         <p>The default treatment is corresponding with parameter <code>false</code>, that object is still not null</p>
                     </h3>
                     <div class="box code">
@@ -667,8 +633,25 @@ using CsvHaibaraNt.Core;
 
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
-    csvHaibara.SetNullIfAllFieldsNull&lt;Address&gt;(true);
+    csvHaibara.SetDefaultIfAllFieldsNullOrMissing&lt;Address&lt;(true);
 } 
+                            </pre>
+                        </code>
+                    </div>
+
+                    <h3>Note: default value in different cases</h3>
+                    <div class="box code">
+                        <code>
+                            <pre>
+public class Person
+{
+    public string FirstName { get; set; }               //default value is null
+    public string LastName { get; set; } = "name";      //default value is "name"
+    public Address Address1 { get; set; }               //default value is null (Address is a class)
+    public int Age {  get; set; }                       //default value is 0
+    public Address Address2 { get; set; } = new();      //default value is new Address()
+    public int Points { get; set; } = 100;              //default value is 100
+}
                             </pre>
                         </code>
                     </div>
@@ -711,6 +694,43 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
                     </div>
                 </div>
 
+                <div id="faqs-div" class="part">
+                    <h2>FAQs</h2>
+                    <div class="box code">
+                        <code>
+                            <prev>
+Q: Does CsvHaibara supports deserializing to generic objects of both class and struct? Or only supporting class?
+A: Since version 1.0.14, CsvHaibara supports both class and struct.
+                            </prev>
+                        </code>
+                    </div>
+
+                    <div class="box code">
+                        <code>
+                            <pre>
+Q: How does CsvHaibara handle case when there are some missing fields in input file?
+A: If any missing field occurs, the corresponding property will be set as its default value.
+
+Ex:
+public int Count_1 { get; set; }            //Count_1's default value is 0
+public int Count_2 { get; set; } = 100;     //Count_2's default value is 100
+                            </pre>
+                        </code>
+                    </div>
+
+                    <div class="box code">
+                        <code>
+                            <pre>
+Q: How does CsvHaibara print null object?
+A: All its properties will be considered as missing values.
+   - For string type, it will be printed as <b>null</b>. If you already set another value   
+   representing for <b>NullStringValue</b>, then that value will be used.
+   - For other types, they will be printed as missing value.
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+
                 <div id="about-part" class="part">
                     <h3>Copyright &copy; Vuong Nguyen - 2026</h3>
                 </div>
@@ -732,12 +752,12 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
                 ["#encoding-div", "Setting Encoding"],
                 ["#escape-div", "Setting Escape"],
                 ["#cultureinfo-div", "Setting CultureInfo"],
-                ["#nullstringvalue-div", "Setting NullStringValue", "&nbsp;&nbsp;(NEW in 5.14)"],
+                ["#nullstringvalue-div", "Setting NullStringValue", "&nbsp;&nbsp;(NEW in 1.0.14)"],
                 ["#booleanconverter-div", "Boolean Converter"],
                 ["#columnheader-div", "Setting Column Header"],
-                ["#mapreference-div", "Map Reference", "&nbsp;&nbsp;(NEW in 5.14)"],
-                ["#setnull-div", "Assign object as null if all fields are null or missing values", "&nbsp;&nbsp;(NEW in 5.14)"],
+                ["#setdefault-div", "Assign object as default value if all fields are null or missing values", "&nbsp;&nbsp;(NEW in 1.0.15)"],
                 ["#exception-div", "Exception"],
+                ["#faqs-div", "FAQs"],
                 ["#about-part", "About"]
             ];
 
