@@ -50,15 +50,7 @@ namespace CsvHaibaraDemos.WpfApp
 
 		private async void btnRead_Click(object sender, RoutedEventArgs e)
 		{
-            Dispatcher.Invoke(() =>
-            {
-                btnRead.IsEnabled = btnSelectFile.IsEnabled = false;
-                btnCancel.IsEnabled = true;
-                cbxHasHeader.IsEnabled = false;
-                Title = "Serializing...";
-                tblCount.Text = string.Empty;
-            });
-
+            ResetUI(-1, false, -1, "Serializing...");
             int count = 0;
 			Stopwatch sw = new Stopwatch();
 
@@ -104,19 +96,30 @@ namespace CsvHaibaraDemos.WpfApp
             }
 		}
 
-        private void ResetUI(int count, bool cancelled, double timeTaken)
+        private void ResetUI(int count, bool cancelled, double timeTaken, string title = TITLE)
         {
 			Dispatcher.Invoke(() =>
 			{
-				btnRead.IsEnabled = btnSelectFile.IsEnabled = true;
-                btnCancel.IsEnabled = false;
-                cbxHasHeader.IsEnabled = true;
-                Title = TITLE;
+				Title = title;
 
-                if (cancelled)
-					tblCount.Text = $"There are total {count} objects (Cancelled). Time taken: {timeTaken} miliseconds.";
+				if (count == -1)
+                {
+                    btnRead.IsEnabled = btnSelectFile.IsEnabled = false;
+                    btnCancel.IsEnabled = true;
+                    cbxHasHeader.IsEnabled = false;
+                    tblCount.Text = string.Empty;
+                }
                 else
-					tblCount.Text = $"There are total {count} objects. Time taken: {timeTaken} miliseconds.";
+                {
+                    btnRead.IsEnabled = btnSelectFile.IsEnabled = true;
+                    btnCancel.IsEnabled = false;
+                    cbxHasHeader.IsEnabled = true;
+
+                    if (cancelled)
+                        tblCount.Text = $"There are total {count} objects (Cancelled). Time taken: {timeTaken} miliseconds.";
+                    else
+                        tblCount.Text = $"There are total {count} objects. Time taken: {timeTaken} miliseconds.";
+                }
 			});
 		}
 
