@@ -248,7 +248,7 @@
                         <span class="snippet">Ultra-rapid</span>
                     </div>
 
-                    <h1>Latest version: 1.0.16</h1><br/>
+                    <h1>Latest version: 1.0.17</h1><br/>
                     <p style="font-style: italic; font-size: 1.3em; color: gray; line-height: 1.5em;">A lightweight and versatile library for reading and writing CSV files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization.</p>
                 </div>
 
@@ -368,7 +368,7 @@ var lst = new List&lt;Person&gt;();
 
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
-    using (StreamIn streamIn = new(csvHaibara, path))
+    await using (StreamIn streamIn = new(csvHaibara, path))
     {
         await foreach (Person person in csvHaibara.DeserializeAsync&lt;Person&gt;(streamIn, true))
             lst.Add(item);
@@ -391,7 +391,7 @@ var lst = new List&lt;dynamic&gt;();
 
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
-    using (StreamIn streamIn = new(csvHaibara, path))
+    await using (StreamIn streamIn = new(csvHaibara, path))
     {
         await foreach (var obj in csvHaibara.DeserializeAsync(streamIn, true))
             lst.Add(obj);
@@ -420,7 +420,7 @@ var objDefinition = new
 
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
-    using (StreamIn streamIn = new(csvHaibara, path))
+    await using (StreamIn streamIn = new(csvHaibara, path))
     {
         await foreach (var obj in csvHaibara.DeserializeAsync(objDefinition, streamIn, true))
             lst.Add(obj);
@@ -462,7 +462,7 @@ var lst = new List&lt;Person&gt;();
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
     csvHaibara.Ignore&lt;Person&gt;(m =&gt; m.Gender, m =&gt; m.Age);
-    using (StreamIn streamIn = new(csvHaibara, path))
+    await using (StreamIn streamIn = new(csvHaibara, path))
     {
         await foreach (Person person in csvHaibara.DeserializeAsync&lt;Person&gt;(streamIn, true))
             lst.Add(item);
