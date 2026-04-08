@@ -434,9 +434,9 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
                 <div id="ignore-columns-div" class="part">
                     <h2>Ignore columns</h2>
                     <h3 class="spacing-height">
-                        <p></p>All ignored properties will be left as their default value, e.g. 0 for int, false for bool</p>
-                        <p>When writing file, all ignored columns disappear in output file</p>
-                        <p>When reading file, all ignored columns <span class="important">MUST NOT APPEAR in input file</span></p>
+                        <p></p>All ignored properties will be left as their default value, e.g. 0 for int, false for bool.</p>
+                        <p>When writing file, all ignored columns disappear in output file.</p>
+                        <p>When reading file, all ignored columns <span class="important">MUST NOT APPEAR in input file.</span></p>
                     </h3>
                     <div class="box code">
                         <code>
@@ -644,8 +644,8 @@ public class Person
                 <div id="setdefault-div" class="part">
                     <h2>Assign object as default value if all fields are null or missing values</h2>
                     <h3 class="spacing-height">
-                        <p>Once this method is called with parameter <code>true</code>, then when reading file, if all fields are null or missing values, that object will be assigned as <code>null</code> class object or <code>default value</code> struct object or its default value if any </p>
-                        <p>The default treatment is corresponding with parameter <code>false</code>, that object is still not null</p>
+                        <p>Once this method is called with parameter <code>true</code>, then when reading file, if all fields are null or missing values, that object will be assigned as <code>null</code> class object or <code>default value</code> struct object or its default value if any.</p>
+                        <p>The default treatment is corresponding with parameter <code>false</code>, that object is left as it is.</p>
                     </h3>
                     <div class="box code">
                         <code>
