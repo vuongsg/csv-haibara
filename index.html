@@ -372,7 +372,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
     await using (StreamIn streamIn = new(csvHaibara, path))
     {
         await foreach (Person person in csvHaibara.DeserializeAsync&lt;Person&gt;(streamIn, true))
-            lst.Add(item);
+            lst.Add(person);
     }
 }
                             </pre>
@@ -466,7 +466,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
     await using (StreamIn streamIn = new(csvHaibara, path))
     {
         await foreach (Person person in csvHaibara.DeserializeAsync&lt;Person&gt;(streamIn, true))
-            lst.Add(item);
+            lst.Add(person);
     }
 }
                             </pre>
