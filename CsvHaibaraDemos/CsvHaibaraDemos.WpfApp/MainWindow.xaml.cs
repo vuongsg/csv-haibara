@@ -66,7 +66,7 @@ namespace CsvHaibaraDemos.WpfApp
 
                     await using (StreamIn streamIn = new(csvHaibara, path))
                     {
-						await foreach (var item in csvHaibara.DeserializeAsync(streamIn, hasHeader: header, cts.Token))
+						await foreach (var item in csvHaibara.DeserializeAsync(streamIn, hasHeader: header, 0, cts.Token))
 							count++;
 					}
 
