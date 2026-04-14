@@ -251,7 +251,7 @@
                         <span class="snippet">Ultra-rapid</span>
                     </div>
 
-                    <h1>Latest version: 1.0.21</h1><br/>
+                    <h1>Latest version: 1.0.22</h1><br/>
                     <p style="font-style: italic; font-size: 1.3em; color: gray; line-height: 1.5em;">A lightweight and versatile library for reading and writing CSV files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization.</p>
                 </div>
 
@@ -513,6 +513,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
                 <div id="encoding-div" class="part">
                     <h2>Setting Encoding</h2>
                     <h3>Default Encoding is <code>UTF8</code></h3>
+                    <h3>Changing <code>Encoding</code> must be done before using <code>StreamIn</code> or <code>StreamOut</code></h3>
                     <div class="box code">
                         <code>
                             <pre>
