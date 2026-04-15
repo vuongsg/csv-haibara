@@ -244,7 +244,7 @@
                         <span class="snippet" title="RFC 4180 Full Support">RFC 4180</span>
                         <span class="snippet">Low memory usage</span>
                         <span class="snippet">Support nested objects</span>
-                        <span class="snippet">Support class and struct</span>
+                        <span class="snippet">Support complex types</span>
                         <span class="snippet">No dependencies</span>
                         <span class="snippet">Feature-rich</span>
                         <span class="snippet">Easy to use</span>
@@ -252,7 +252,7 @@
                     </div>
 
                     <h1>Latest version: 1.0.22</h1><br/>
-                    <p style="font-style: italic; font-size: 1.3em; color: gray; line-height: 1.5em;">A lightweight and versatile library for reading and writing CSV files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization.</p>
+                    <p style="font-style: italic; font-size: 1.3em; color: gray; line-height: 1.5em;">A lightweight and versatile library for reading and writing Csv files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization.</p>
                 </div>
 
                 <div id="install-div" class="part">
@@ -513,7 +513,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
                 <div id="encoding-div" class="part">
                     <h2>Setting Encoding</h2>
                     <h3>Default Encoding is <code>UTF8</code></h3>
-                    <h3>Changing <code>Encoding</code> must be done before using <code>StreamIn</code> or <code>StreamOut</code></h3>
+                    <h3>Changing <code>Encoding</code> <span class="important">must be done</span> before using <code>StreamIn</code> or <code>StreamOut</code></h3>
                     <div class="box code">
                         <code>
                             <pre>
@@ -530,7 +530,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 
                 <div id="escape-div" class="part">
                     <h2>Setting Escape</h2>
-                    <h3>Default Escape is <code>"</code></h3>
+                    <h3>Default Escape is <code>double quote</code></h3>
                     <div class="box code">
                         <code>
                             <pre>
@@ -586,7 +586,7 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 
                 <div id="booleanconverter-div" class="part">
                     <h2>Boolean Converter</h2>
-                    <h3>Instead of traditional values <i>true/false</i>. You want to use other values like <i>yes/no</i>, <i>1/0</i></h3>
+                    <h3>Instead of traditional values <code>true/false</code>. You are able to use other custom values like <code>yes/no</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>1/0</code></h3>
                     <div class="box code">
                         <code>
                             <pre>
@@ -721,6 +721,9 @@ public class Person
 
 - When writing file, list of objects is null
 
+- When number of columns in any data row (including header row) is greater 
+than number of properties of that type (generic and anonymous types) 
+
 - Cast value failed
     Ex:
     public class Person
@@ -757,8 +760,8 @@ Q: How does CsvHaibara handle case when there are some missing fields in input f
 A: If any missing field occurs, the corresponding property will be set as its default value.
 
 Ex:
-public int Count_1 { get; set; }            //Count_1's default value is 0
-public int Count_2 { get; set; } = 100;     //Count_2's default value is 100
+public int Count_1 { get; set; }            //default value is 0
+public int Count_2 { get; set; } = 100;     //default value is 100
                             </pre>
                         </code>
                     </div>
@@ -767,7 +770,7 @@ public int Count_2 { get; set; } = 100;     //Count_2's default value is 100
                         <code>
                             <pre>
 Q: How does CsvHaibara print null object?
-A: All its properties will be considered as missing values.
+A: Its properties will be considered as missing values.
    - For string type, it will be printed as <b>null</b>. If you already set another value   
    representing for <b>NullStringValue</b>, then that value will be used.
    - For other types, they will be printed as missing value.
