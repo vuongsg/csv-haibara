@@ -622,6 +622,17 @@ public class Person
                             </pre>
                         </code>
                     </div>
+
+                    <div class="box code">
+                        <code>
+                            <pre>
+Example: output file
+Given Name,Family Name
+Fina,Hugg
+Dan,Rail
+                            </pre>
+                        </code>
+                    </div>
                 </div>
 
                 <div id="datetimeformat-div" clas="part">
@@ -656,9 +667,9 @@ public class Person
                             <pre>
 public class Person
 {
-    public string Name {  get; set; }
+    public string Name { get; set; }
     public Address Address1 { get; set; }
-    public int Age {  get; set; }
+    public int Age { get; set; }
     public Address Address2 { get; set; }
 }
 
@@ -678,7 +689,7 @@ using CsvHaibaraNt.Core;
 
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
-    csvHaibara.SetDefaultIfAllFieldsNullOrMissing&lt;Address&lt;(true);
+    csvHaibara.SetDefaultIfAllFieldsNullOrMissing&lt;Address&gt;(true);
 } 
                             </pre>
                         </code>
