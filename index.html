@@ -3,6 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Documentation | Csv Haibara</title>
+        <link rel="icon" type="image/x-icon" href="imgs/icon.png" />
         <meta property="og:title" content="Documentation | Csv Haibara" />
         <meta name="description" content="A lightweight and versatile library for reading and writing Csv files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization." />
         <meta property="og:description" content="A lightweight and versatile library for reading and writing Csv files. Focus on smooth asynchronous processing, streaming large files efficiently, and maintaining consistent rules for serialization and deserialization." />
@@ -521,6 +522,8 @@ using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
                             <pre>
 using CsvHaibaraNt.Core;
 
+string path = "person.csv";
+
 using (ICsvHaibara csvHaibara = CsvHaibaraConfiguration.GetCsvHaibara())
 {
     csvHaibara.Encoding = Encoding.ASCII;
@@ -771,7 +774,7 @@ than number of properties of that type (generic and anonymous types)
                         <code>
                             <prev>
 Q: Does CsvHaibara support deserializing to generic objects of both class and struct? Or only supporting class?
-A: Since version 1.0.14, CsvHaibara supports both class and struct.
+A: CsvHaibara supports both class and struct.
                             </prev>
                         </code>
                     </div>
